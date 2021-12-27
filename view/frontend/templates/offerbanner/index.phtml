@@ -1,0 +1,203 @@
+<?php
+$blog_collection = $block->getBlogCollection();
+$id = explode(',', $this->getId());
+// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $conf = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('offerbanner/general/offerbanners');
+// if($conf==1){
+
+?>
+
+<table cellspacing="0" class="data-table" id="data-table">
+    <tbody>
+    <?php
+	$test = $this->getId();
+
+    foreach ($blog_collection as $_dataset):
+	   $end_date   = $_dataset['end_date'];
+	   $start_date = $_dataset['start_date'];
+	   $current_date = date('Y-m-d H:i:s');
+	   if($_dataset['status'] == 1 ){
+	   if($end_date >= $current_date AND $start_date < $current_date ){ 
+       $status   = $_dataset['status'];
+       $bannerid = $_dataset['id'];
+
+	    
+		if (!empty($test)){
+			if (in_array($bannerid, $id)){				
+                if ($status == 1) {
+					
+                    $start_date = $_dataset['start_date'];
+                    $end_date   = $_dataset['end_date'];                   
+                    $start = strtotime($start_date);
+                    $end   = strtotime($end_date);
+                   
+                    list($year, $month, $day) = preg_split('[-]', $end_date);
+					
+                    $current_date = date("Y-m-d h:i:00");
+                    $current      = strtotime($current_date);
+                    if ($end <= $current) {
+                    } else {
+                        if ($start <= $current) {
+                            
+                         if ($start <= $end) {
+                                                    $finaldate = $year . '/' . $month . '/' . $day;
+                    								
+                    								
+                                                        ?>
+                                                       <tr>
+                                                       <td  valign="middle" style="vertical-align:middle;">
+                                                        <div class="img-offer-thumb">
+                                            			<?php $blog_img = $block->getImageMediaPath(); ?>
+                                               <a href="<?php echo $_dataset['url'];?>" target="_blank"> ?>
+                                                <?php $baseurl = $this->getUrl(); 
+                                                  $x = explode('/' , $baseurl);
+                                                  $final=  $x[0];
+                                                  $finals = $x[2];
+                                                  $baseurl = $final."//".$finals;
+                                                 $image =  $baseurl."/pub/media/slider".$_dataset['image']; ?>
+                                                       <img style="background:url(<?php echo $image ;?>) no-repeat scroll center center / 100%" />
+                                                         <div class="offer-banner"><span class="offer-banner-title"><?php echo $_dataset['title'];?></span>
+                                                 <ul class="countdown" id="banner<?php echo $_dataset['id'];?>">
+                                            				<li> <span class="days">00</span>
+                                            				<p class="days_ref">days</p>
+                                            				</li>
+                                            				<li class="seperator">:</li>
+                                            				<li> <span class="hours">00</span>
+                                            				<p class="hours_ref">hours</p>
+                                            				</li>
+                                            				<li class="seperator">:</li>
+                                            				<li> <span class="minutes">00</span>
+                                            				<p class="minutes_ref">minutes</p>
+                                            				</li>
+                                            				<li class="seperator">:</li>
+                                            				<li> <span class="seconds">00</span>
+                                            				<p class="seconds_ref">seconds</p>
+                                            				</li>
+                                            				</ul>
+                                                        <p class="offer-banner-content"><?php echo $_dataset['content'];?></p>
+                                                        </a>
+                                                        </div> </div></td>
+                                                        </tr>
+                                          <?php
+                            }
+                        }
+                    }
+                }else{
+					
+				}
+		    }
+            else{
+                continue;
+            }
+
+			
+		}else{
+			
+			
+		if ($status == 1) {
+                    $start_date = $_dataset['start_date'];
+                    $end_date   = $_dataset['end_date'];                   
+                    $start = strtotime($start_date);
+                    $end   = strtotime($end_date);
+                   
+                    list($year, $month, $day) = preg_split('[-]', $end_date);
+                    $current_date = date("Y-m-d h:i:00");
+                    $current      = strtotime($current_date);
+                    if ($end <= $current) {
+                    } else {
+                        if ($start <= $current) {
+                            
+                            if ($start <= $end) {
+                                $finaldate = $year . '/' . $month . '/' . $day;
+								
+?>
+           <tr>
+           <td  valign="middle" style="vertical-align:middle;">
+            <div class="img-offer-thumb">
+			<a href="<?php echo $_dataset['url'];?>" target="_blank"> ?>
+                                                <?php $baseurl = $this->getUrl(); 
+                                                  $x = explode('/' , $baseurl);
+                                                  $final=  $x[0];
+                                                  $finals = $x[2];
+                                                  $baseurl = $final."//".$finals;
+                                                 $image =  $baseurl."/pub/media/slider".$_dataset['image']; ?>
+                                                       <img style="background:url(<?php echo $image ;?>) no-repeat scroll center center / 100%" />
+             <div class="offer-banner"><span class="offer-banner-title"><?php echo $_dataset['title'];?></span>
+            <ul class="countdown" id="banner<?php echo $_dataset['id'];?>">
+				<li> <span class="days">00</span>
+				<p class="days_ref">days</p>
+				</li>
+				<li class="seperator">:</li>
+				<li> <span class="hours">00</span>
+				<p class="hours_ref">hours</p>
+				</li>
+				<li class="seperator">:</li>
+				<li> <span class="minutes">00</span>
+				<p class="minutes_ref">minutes</p>
+				</li>
+				<li class="seperator">:</li>
+				<li> <span class="seconds">00</span>
+				<p class="seconds_ref">seconds</p>
+				</li>
+				</ul>
+            <p class="offer-banner-content"><?php echo $_dataset['content'];?></p>
+            </a>
+            </div> </div></td>
+            </tr>
+      <?php
+                            }
+                        }
+                    }
+                }else{
+					
+				}	
+			
+			
+			
+		}
+
+	    if (in_array($bannerid, $id))
+        { ?>     
+           <script type="text/javascript">
+                //jQuery.noConflict();
+           </script> 
+    	   <script class="source123" type="text/javascript">
+                require([
+                'jquery',
+                'Dotsquares_Offerbanner/js/jquery.downCount'
+                ], function ($) {
+                    //console.log('countdowntimer start');
+                    jQuery('#banner<?php echo $_dataset['id']; ?>').downCount({
+                    date: '<?php echo $finaldate; ?>',
+                    offset: +0
+                    });
+                });
+            </script> 
+		<?php 
+        }
+        else
+        { ?>
+    		<script class="source123" type="text/javascript">
+                require([
+                'jquery',
+                'Dotsquares_Offerbanner/js/jquery.downCount'
+                ], function ($) {
+                    //console.log('countdowntimer start');
+                    jQuery('#banner<?php echo $_dataset['id']; ?>').downCount({
+                    date: '<?php echo $finaldate; ?>',
+                    offset: +0
+                    });
+                });
+            </script> 
+	   <?php 
+        }
+	   }
+    }
+       endforeach; ?>
+    </tbody>
+</table>
+
+<?php// }//echo $this->getPagerHtml(); ?>
+
+
+

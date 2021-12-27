@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2015 Dotsquares. All rights reserved.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <update handle="formkey"/>
+    <container name="root">
+        <block class="Dotsquares\Offerbanner\Block\Adminhtml\Items\Grid" name="admin.block.items.grid"/>
+    </container>
+</layout>
